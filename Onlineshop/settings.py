@@ -111,7 +111,7 @@ EMAIL_HOST_USER = 'Mapsateamb@gmail.com'
 EMAIL_HOST_PASSWORD = 'zbxdbhqafrvduhhn'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Online Website <mongard.amir@gmail.com>'
+DEFAULT_FROM_EMAIL = 'Online Website <Mapsateamb@gmail.com>'
 
 
 # Internationalization
