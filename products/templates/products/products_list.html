@@ -1,0 +1,76 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+{% load render_partial %}
+
+{% block content %}
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">لیست محصولات</h2>
+                        {% for product in page_obj %}
+                            <div class="col-sm-4 pull-right">
+                                <div class="product-image-wrapper">
+                                    <div class="single-products">
+                                        <div class="productinfo text-center">
+                                            {% if product.image %}
+                                            <img src="{{ product.image.url }}" alt="">
+                                            {% endif %}
+                                            <h2>{{ product.price }} تومان</h2>
+                                            <p>{{ product.title }}</p>
+                                            <a href="#" class="btn btn-default add-to-cart"><i
+                                                    class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
+                                        </div>
+                                        <div class="product-overlay">
+                                            <div class="overlay-content">
+                                                <h2>{{ product.price }} تومان</h2>
+                                                <p>{{ product.title }}</p>
+                                                <a href="#" class="btn btn-default add-to-cart"><i
+                                                        class="fa fa-shopping-cart"></i>افزودن به سبـد خریـد</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="choose">
+                                        <ul class="nav nav-pills nav-justified">
+                                            <li><a href="{% url 'products:product-detail' pk=product.pk %}"><i class="fa fa-plus-square"></i>مشاهده</a></li>
+                                            <!-- <li><a href="{{ product.get_absolute_url }}"><i class="fa fa-plus-square"></i>مشاهده</a></li> -->
+
+                                            <li><a href=""><i class="fa fa-plus-square"></i>مقایسه</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+
+                        <div class="clearfix"></div>
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %}
+                                <li><a href="?page={{ page_obj.previous_page_number }}">قبلی</a></li>
+                            {% endif %}
+                            {% for page in paginator.page_range %}
+                                {% if page == page_obj.number %}
+                                    <li class="active"><a href="?page={{ page }}">{{ page }}</a></li>
+                                {% else %}
+                                    <li><a href="?page={{ page }}">{{ page }}</a></li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %}
+                                <li><a href="?page={{ page_obj.next_page_number }}">بعدی</a></li>
+                            {% endif %}
+                        </ul>
+                    </div><!--features_items-->
+                </div>>
+
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        {% render_partial 'products:products_categories_partial' %}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
