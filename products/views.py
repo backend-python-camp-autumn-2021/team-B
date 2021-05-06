@@ -73,10 +73,6 @@ class ProductsDetail(DetailView):
         context['new_order_form'] = UserNewOrderForm()
         return context
 
-
-   
-
-
       
 def products_categories_partial(request):
     categories = Category.objects.all()
