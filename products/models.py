@@ -118,6 +118,7 @@ class Cart(models.Model):
 
 class CartItem(models.Model):
     quantity = models.IntegerField(default=1)
+    price = models.IntegerField(verbose_name='قیمت محصول')
     # has ForeignKey
     products = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='carts', related_query_name='cart')
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items', related_query_name='item')
