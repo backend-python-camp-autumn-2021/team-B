@@ -1,4 +1,4 @@
-FROM frolvlad/alpine-python3:latest
+FROM python:3
 ENV PYTHONUNBUFFERED=1
 WORKDIR /code
 COPY requirements.txt /code/
