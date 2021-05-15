@@ -50,7 +50,7 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.RESTRICT, related_name='profile',verbose_name='کاربر')
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile',verbose_name='کاربر')
     image = models.ImageField(upload_to='profile/', null=True,verbose_name='تصویر')
     GENDER_CHOICES = [
         ('Female', 'Female'),
