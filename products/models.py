@@ -141,6 +141,7 @@ class Cart(models.Model):
             return int( total - discount_price )
         return total
 
+
 class CartItem(models.Model):
     quantity = models.IntegerField(default=0)
     # price = models.IntegerField(verbose_name='قیمت محصول')
