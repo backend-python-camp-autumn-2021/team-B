@@ -17,6 +17,7 @@ class ProductCartSerializer(serializers.ModelSerializer):
 class CartSerializer(serializers.ModelSerializer):
     carts=serializers.StringRelatedField(read_only=True)
 
+
     class Meta:
         model=Cart
         fields='__all__'
@@ -24,7 +25,7 @@ class CartSerializer(serializers.ModelSerializer):
 
 class CartItemSerializer(serializers.HyperlinkedModelSerializer):
     cartproduct=serializers.StringRelatedField(read_only=True)
-    items=serializers.StringRelatedField(many=True,read_only=True)
+    items=serializers.StringRelatedField(read_only=True)
 
     class Meta:
         model=CartItem
