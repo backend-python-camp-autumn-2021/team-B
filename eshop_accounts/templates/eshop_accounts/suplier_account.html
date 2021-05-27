@@ -1,0 +1,24 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <form action="" enctype="multipart/form-data"></form>
+
+                <label >{{suplier.bank_acconunt}}</label>
+                <hr>
+                <br>
+                {% for pr in products %}
+                    {{pr.title}}
+                {% endfor %}
+                <a href="{% url 'eshop_accounts:create_product' %}">add Product</a>
+            
+            </div>
+            {% render_partial 'eshop_accounts.views.user_sidebar' %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="contact-form">
+                    <div class="status alert alert-success" style="display: none"></div>
+                    <form id="main-contact-form" class="contact-form row" enctype="multipart/form-data" name="contact-form" method="post"
+                    action="">
+                  {% csrf_token %}
+                  
+                {{form}}
+                <!-- {{edit_form}} -->
+                  <div class="form-group col-md-12">
+                      <input type="submit" name="submit" class="btn btn-primary pull-right" value="ارسـال">
+                  </div>
+                  
+              </form>
+                  
+                </div>
+            </div>
+            {% render_partial 'eshop_accounts.views.user_sidebar' %}
+        </div>
+    </div>
+
+{% endblock %}
