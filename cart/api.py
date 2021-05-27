@@ -1,11 +1,15 @@
 from rest_framework.views import APIView
 from rest_framework import viewsets
-from .seriallizers import CartItemSerializer,CartSerializer
+from .seriallizers import CartItemSerializer,CartSerializer,CartItemDetailSerializer
 from django.apps import apps
 from rest_framework.viewsets import ReadOnlyModelViewSet
 Cart = apps.get_model('products', 'Cart')
 CartItem=apps.get_model('products','CartItem')
 from .seriallizers import CartItemSerializer,CartSerializer
+from rest_framework import generics
+
+
+
 
 
 class CartViewSet(viewsets.ModelViewSet):
@@ -28,3 +32,8 @@ class CartListViewSet(viewsets.ModelViewSet):
 #
 #     def get_serializer_class(self):
 #         return self.serializers.get(self.action)
+class CartdetailView(generics.RetrieveAPIView):
+    queryset=CartItem.objects.all()
+    serializer_class=CartItemDetailSerializer
+
+    

@@ -4,6 +4,7 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path,include
 from .views import home_page,header,footer
+from cart.api import CartdetailView 
 
 urlpatterns = [
 
@@ -12,7 +13,7 @@ urlpatterns = [
     path('products/', include('products.urls', namespace='products')),
     path('cart/', include('cart.urls', namespace='cart')),
     path('comment/', include('comment.urls')),
-
+    path('cart-detail/<int:pk>',CartdetailView.as_view() ,name='cartitem-detail'),
     
     
     # home
