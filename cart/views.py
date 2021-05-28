@@ -10,7 +10,7 @@ from django.http import HttpResponse,Http404
 from django.shortcuts import redirect
 from zeep import Client
 
-@login_required
+@login_required(login_url=reverse_lazy('eshop_accounts:login'))
 def add_to_cart(request,product_id):
     form = AddToCartForm(request.POST or None)
     if form.is_valid():
@@ -29,7 +29,7 @@ def add_to_cart(request,product_id):
     return redirect('/')
 
 
-@login_required
+@login_required(login_url=reverse_lazy('eshop_accounts:login'))
 def show_order(request, *args, **kwargs):
 
     context = {

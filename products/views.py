@@ -1,3 +1,4 @@
+import itertools
 from django.http.response import HttpResponse
 from django.shortcuts import render
 from django.http import Http404
@@ -52,7 +53,6 @@ class ProductsDetail(DetailView):
     model = Product
     template_name = "products/product_detail.html"
     
-    
     def get_object(self,queryset=None):
         object = super().get_object(queryset)
         pk = self.kwargs.get(self.pk_url_kwarg)
@@ -66,10 +66,15 @@ class ProductsDetail(DetailView):
         print( self.request.session['views'])    
         return object
 
+    def my_grouper(self, n, iterable):
+        args = [iter(iterable)] * n
+        return ([e for e in t if e is not None] for t in itertools.zip_longest(*args))
 
     def get_context_data(self,*args,**kwargs):
         context = super().get_context_data(*args,**kwargs)
         context['form'] = AddToCartForm()
+        related_products = Product.objects.filter(Categories=self.get_object().Categories)
+        context['related_products'] = self.my_grouper(4, related_products)
         return context
 
       
@@ -80,5 +85,7 @@ def products_categories_partial(request):
     }
     return render(request, 'products/products_categories_partial.html', context)
 
-    
+
+
+
 	 
