@@ -76,7 +76,7 @@ class RegisterFormCustomer(CustomUserCreationForm):
 
 
 class RegisterFormSuplier(CustomUserCreationForm):
-    bankaccount = forms.CharField(max_length=30)
+    bankaccount = forms.CharField(max_length=30, label='حساب بانکی')
 
     def save(self, *args,**kwargs):        
         user = super().save(*args, **kwargs)

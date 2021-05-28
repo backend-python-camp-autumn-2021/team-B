@@ -5,9 +5,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.http import request
 from django.shortcuts import render,redirect,get_object_or_404
-from django.contrib.auth import views as auth_views
 from django.views import View
-from django.views.generic import CreateView, UpdateView
+from django.contrib.auth import views as auth_views
+from django.views.generic import CreateView, UpdateView, FormView
 from django.contrib.auth import authenticate, login, logout, get_user_model
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
@@ -35,16 +35,16 @@ class UserLogin(LoginView):
         return '/'
 
 # Customer   
-class SignUpCustomer(auth_views.FormView):
+class SignUpCustomer(CreateView):
     template_name="eshop_accounts/register.html"
     form_class = RegisterFormCustomer
 
     def get_success_url(self):
         return reverse_lazy('eshop_accounts:login')
 
-    def form_valid(self, form):
-        user = form.save()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     form.save()
+    #     return super().form_valid(form)
 
 
 class CustomerProfileView(View):  
@@ -69,7 +69,7 @@ def user_sidebar(request):
     return render(request, 'eshop_accounts/user_sidebar.html', {})
 
 # Suplier
-class SignUpSuplier(auth_views.FormView):
+class SignUpSuplier(FormView):
     template_name="eshop_accounts/register2.html"
     form_class = RegisterFormSuplier
 

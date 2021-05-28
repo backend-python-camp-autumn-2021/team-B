@@ -10,7 +10,9 @@
                         <h2>ثبت نام کاربـر جدیـد</h2>
                         <form action="?next={{next_url}}" method="post"  enctype="multipart/form-data" novalidate>
                             {% csrf_token %}
-                            {{form}}
+                            {% for form in form %}
+                            {{form.label}} {{form.help_text}}  {{form}}
+                            {% endfor %}
                             <button type="submit" class="btn btn-default">ثبت نام</button>
                         </form>
                     </div><!--/sign up form-->
