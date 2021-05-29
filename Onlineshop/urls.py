@@ -16,10 +16,13 @@ Including another URLconf
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path,include
-from .views import home_page,header,footer
+from django.urls import path, include
+from .views import home_page, header, footer
 
 urlpatterns = [
+
+    # api
+    path("product-api/", include("products.urls"), name="product"),
 
     # app
     path('eshop_accounts/', include('eshop_accounts.urls', namespace='eshop_accounts')),
@@ -27,8 +30,8 @@ urlpatterns = [
     path('cart/', include('cart.urls', namespace='cart')),
     path('comment/', include('comment.urls')),
 
-    
-    
+    # path("product-api/", include("products.urls"), namespace="product"),
+
     # home
     path('', home_page, name='home'),
     path('header', header, name="header"),

@@ -1,6 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
 
 from .models import Product,Category
 
@@ -17,5 +16,7 @@ class CategoryAdmin(admin.ModelAdmin):
     list_display = ['__str__', 'title','slug']
     prepopulated_fields = {'slug':('title',)}
 
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Category,CategoryAdmin)
+# admin.site.register(Product, ProductAdmin)
+# admin.site.register(Category,CategoryAdmin)
+admin.site.register(Product)
+admin.site.register(Category)

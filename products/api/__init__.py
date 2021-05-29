@@ -1,0 +1,2 @@
+class ProductApi:
+    pass

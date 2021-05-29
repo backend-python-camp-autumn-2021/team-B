@@ -1,0 +1,22 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="contact-form">
+                    <div class="status alert alert-success" enctype="multipart/form-data" style="display: none"></div>
+                    <form id="main-contact-form" class="contact-form row" name="contact-form" method="post"
+                          action="{% url 'eshop_accounts:create_product' %} ">
+                        {% csrf_token %}
+                      
+                        {{form.as_p}}
+                        <button>Submit</button>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
