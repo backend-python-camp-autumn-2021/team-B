@@ -1,0 +1,187 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load static %}
+
+{% block content %}
+<section id="slider"><!--slider-->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#slider-carousel" data-slide-to="1"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+
+                        {% for slider in sliders %}
+                            <div class="item {{ forloop.first|yesno:"active," }}">
+                                <div class="col-sm-6">
+                                    <h2>{{ slider.title }}</h2>
+                                    <p>
+                                        {{ slider.description }}
+                                    </p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <img src="{{ slider.image.url }}" class="girl img-responsive"
+                                         alt="{{ slider.title }}" width="500px"/>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section><!--/slider-->
+
+    <section>
+        <div class="container">
+            <div class="row">
+
+                <div class="recommended_items"><!--NewProduct_items-->
+                    <h2 class="title text-center">پر بازدیدترین محصولات</h2>
+
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for group in most_visit %}
+                                <div class='item {{ forloop.first|yesno:"active," }}'>
+                                    {% for product in group %}
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        <img src="{{ product.image.url }}" alt=""/>
+                                                        <h2>{{ product.price }} تومان</h2>
+                                                        <p>{{ product.title }}</p>
+                                                        <form method="post" class="text-center" action="{% url 'cart:add-to-cart' product_id=product.id  %}">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="count" value=1>
+                                                            <!-- <input type="hidden" name="form" value='{{ form.count }}'> -->
+                                                            <button type="submit" class="btn btn-fefault cart">
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                                افـزودن به سبـد خریـد
+                                                            </button>
+                                                        </form>
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div><!--/NewProduct_items-->
+
+              <div class="recommended_items"><!--NewProduct_items-->
+                    <h2 class="title text-center">جدیدترین محصولات</h2>
+
+                    <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            {% for group in latest_products %}
+                                <div class='item {{ forloop.first|yesno:"active," }}'>
+                                    {% for product in group %}
+                                        <div class="col-sm-3">
+                                            <div class="product-image-wrapper">
+                                                <div class="single-products">
+                                                    <div class="productinfo text-center">
+                                                        {% if product.image %}
+                                                            <img src="{{ product.image.url }}" alt=""/>
+                                                        {% endif %}
+                                                        <h2>{{ product.price }} تومان</h2>
+                                                        <p>{{ product.title }}</p>
+                                                        <form method="post" action="{% url 'cart:add-to-cart' product_id=product.id  %}">
+                                                            {% csrf_token %}
+                                                            <input type="hidden" name="count" value=1>
+                                                            <!-- <input type="hidden" value="{{form.count}}"> -->
+                                                            <button type="submit" class="text-center btn btn-fefault cart"  >
+                                                                افـزودن به سبـد خریـد
+                                                            </button>
+                                                        </form>
+                                                        
+                                                        
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                </div><!--/NewProduct_items-->
+
+                <div class="col-sm-12 padding-right">
+                
+                    <div class="category-tab"><!--category-tab-->
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <!-- <li class="active"><a href="#Tab_001" data-toggle="tab">گـروه محصولات 1</a></li>
+                                <li><a href="#Tab_002" data-toggle="tab">گـروه محصولات 2</a></li>
+                                <li><a href="#Tab_003" data-toggle="tab">گـروه محصولات 3</a></li>
+                                <li><a href="#Tab_004" data-toggle="tab">گـروه محصولات 4</a></li>
+                                <li><a href="#Tab_005" data-toggle="tab">گـروه محصولات 5</a></li> -->
+                                {% for cat in cats %}
+                                    <li><a href="?c_q={{cat.pk}}">{{ cat.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade active in" id="Tab_001">
+                                {% for pr in pr_cats.all %}
+                                    <div class="col-sm-3">
+                                        <div class="product-image-wrapper">
+                                            <div class="single-products">
+                                                <div class="productinfo text-center">
+                                                    <img src="{{ pr.image.url }}" alt=""/>
+                                                    <h2>{{ pr.price }} ريال</h2>
+                                                    <p>{{ pr.title }}</p>
+                                                    <form method="post" action="{% url 'cart:add-to-cart' product_id=pr.id  %}">
+                                                        {% csrf_token %}
+                                                        <input type="hidden" name="count" value=1>
+                                                        <!-- <input type="hidden" value="{{form.count}}"> -->
+                                                        <button type="submit" class="text-center btn btn-fefault cart"  >
+                                                            افـزودن به سبـد خریـد
+                                                        </button>
+                                                    </form>                                                
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div><!--/category-tab-->
+
+                </div>
+
+            </div>
+        </div>
+</section>
+{% endblock %}

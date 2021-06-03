@@ -1,0 +1,59 @@
+{% extends 'shared/_MainLayout.html' %}
+{% load render_partial %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+
+              
+                <div class="contact-form">
+                    <div class="status alert alert-success" style="display: none"></div>
+                    <form id="main-contact-form" enctype="multipart/form-data" class="contact-form row" name="contact-form" method="post"
+                          action="">
+                        {% csrf_token %}
+                        <div class="form-group col-md-12">
+                            <label>ایمیل:</label>
+                            {{ user.email }}                           
+                        </div>
+                        <div class="form-group col-md-12">  
+                            <label>نام:</label>                       
+                             {{ user.first_name }}
+                        </div>
+                        <div class="form-group col-md-12"> 
+                            <label> نام خانوادگی:</label>                        
+                            {{ user.last_name }}
+                        </div>
+                        <div class="form-group col-md-12">
+                            
+                            {% for error in user.first_name.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                            <img src="{{ user.image.url }}" alt="" width="140px" height="140px">
+                        </div>
+                        <div class="form-group col-md-12">
+                            {% if user.phone %}
+                                {{ user.phone }}
+                            {% endif %}
+                            {% for error in user.last_name.errors %}
+                                <p class="text-danger">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                        <div class="form-group col-md-12">
+                            <button type="button" class="btn btn-light"> 
+                                <a href="{% url 'eshop_accounts:reset_pass' %}" class="btn btn-light">ریست پسورد</a>
+                           </button>
+                         
+                        </div>
+                        
+                    </form>
+                </div>
+               
+                
+            </div>
+            {% render_partial 'eshop_accounts.views.user_sidebar' %}
+        </div>
+    </div>
+
+{% endblock %}
